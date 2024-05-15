@@ -1,0 +1,78 @@
+{% extends 'index.html' %}
+{% load static %}
+
+{% block heat %}
+        <meta charset="UTF-8">
+        <title>Фильм.</title>
+        <link rel="stylesheet" href="{% static 'css/index.css' %}">
+        <link rel="stylesheet" href="{% static 'css/person.css' %}">
+{% endblock %}
+
+{% block content %}
+    <h1>О фильме.</h1>
+    <div class="one">
+        <img src="{% static modelkino.poster %}" alt="" width="300">
+        <h3>{{ modelkino.name }}</h3>
+        <h3>Жанр: {{ modelkino.genre }}</h3>
+        <h3>Режисер: {{ modelkino.direktor }}</h3>
+        <h3>Страна: {{ modelkino.country }}</h3>
+        <h3>Год выпуска: {{ modelkino.year }}</h3>
+        <h3>Актеры:</h3>
+        <ul>
+            {% for one in modelkino.acter.all %}
+                <li>
+                    {{ one.name }}
+                </li>
+            {% endfor %}
+        </ul>
+        <h3>Рейтинг: {{ modelkino.rating }}</h3>
+        <h3>Подробнее: <br> {{ modelkino.info }}</h3>
+        <h3>Подписка: {{ modelkino.podpiska }}</h3>
+        {% if user.is_authenticated %}
+            <h4>Подписка пользователя. {{ user.modelprofile.podpiska }}</h4>
+        {% endif %}
+{#        <h4>{{ modelkino.podpiska.id }}</h4>#}
+{#        <h4>{{ user.modelprofile.podpiska.id }}</h4>#}
+
+{#        {% for one in modelkino.podpiska.all %}#}
+{#            <li>#}
+{#                {{ one.name }}#}
+{#            </li>#}
+{#        {% endfor %}#}
+        {% if user.is_authenticated %}
+            {% if  user.modelprofile.podpiska.id <= modelkino.podpiska.id%}
+                <h1>Трейлер.</h1>
+                <iframe width="560" height="315" src="{{ modelkino.file }}" title="" frameborder="" allow="" referrerpolicy="" allowfullscreen></iframe>
+            {% else %}
+                <h3>Купите подписку.
+                    <a href="{% url 'kabinet' %}">
+                        <button>Ссылка.</button>
+                    </a>
+                </h3>
+            {% endif %}
+        {% else %}
+            <h3>Авторезуйтесь для просмотра фильма.
+                <a href="{% url 'login' %}">
+                    <button>ссылка</button>
+                </a>
+            </h3>
+        {% endif %}
+
+        {% if user.is_authenticated %}
+            <form action="{% url 'otziv' modelkino.id%}" method="post">
+                {% csrf_token %}
+                {{ modelkino.getForm }}
+                <input type="submit" value="Отправить">
+            </form>
+        {% endif %}
+
+                    {#    ОТЗЫВЫ#}
+    <h1>Отзывы.</h1>
+    {% for one in modelkino.getOtziv %}
+        <div>
+            <h4>{{ one.user }}</h4>
+            <p>{{ one.text }}</p>
+        </div>
+    {% endfor %}
+    </div>
+{% endblock %}

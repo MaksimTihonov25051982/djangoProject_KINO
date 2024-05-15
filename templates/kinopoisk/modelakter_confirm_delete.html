@@ -1,0 +1,16 @@
+{% extends 'index.html' %}
+{% load static %}
+
+{% block heat %}
+        <meta charset="UTF-8">
+        <title>Фильм.</title>
+        <link rel="stylesheet" href="{% static 'css/index.css' %}">
+{% endblock %}
+
+{% block content %}
+    <h1>Актер.</h1>
+    <img src="{% static modelkino.poster %}" alt="" width="300">
+    <h3>{{ modelakter.name }}</h3>
+    <img src="{% static modelakter.foto %}" alt="" width="350">
+    <p>{{ modelakter.info }}</p>
+{% endblock %}

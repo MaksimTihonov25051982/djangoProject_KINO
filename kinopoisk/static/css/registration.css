@@ -1,0 +1,49 @@
+form {
+    flex-wrap: nowrap;
+    justify-content: center;
+    text-align: center;
+    background-color:darkmagenta;
+    border: 1px solid black;
+    border-radius: 5px;
+    display: flex;
+    flex-direction: column;
+    flex-grow: revert;
+    flex-flow: column wrap;
+    min-width: 25%;
+    max-width: 60%;
+    align-content: space-around;
+    width: 500px;
+    margin: 50px auto;
+    padding: 15px;
+}
+
+form a{
+    line-height: 2em;
+    text-decoration: none;
+    font-size: 1.5em;
+    color: #DCDCDC;
+}
+
+form a:hover{
+    color: #FFFFFF;
+
+}
+
+.a {
+    flex-wrap: nowrap;
+    justify-content: center;
+    text-align: center;
+    display: flex;
+    align-content: space-around;
+    width: 500px;
+    margin: auto;
+    padding: 30px;
+    line-height: 2em;
+    text-decoration: none;
+    font-size: 1.5em;
+    color: darkmagenta;
+}
+
+.a:hover{
+    color: black;
+}
